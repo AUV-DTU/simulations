@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+<world name="simple_world">
+   <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+    
+    <include>
+      <uri>model://models/water</uri>
+    </include>
+
+    <include>
+      <uri>model://models/kujagra1</uri>      
+    </include>
+
+    <include>
+      <uri>model://models/pool</uri>
+      <pose>0 0 -0.1 0 0 0</pose>
+    </include>
+  </world>
+</sdf>

@@ -1,0 +1,508 @@
+<sdf version='1.11'>
+  <model name='kujagra_sim'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.018382152997411201 0.016960544864329598 0.0314070021340392 0 0 0</pose>
+        <mass>78.46869</mass>
+        <inertia>
+          <ixx>5.6152303161666</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.68988741408286</iyy>
+          <iyz>0</iyz>
+          <izz>5.8049364461399</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+        <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/base_link.STL</uri>
+          </mesh>
+        --> 
+  
+          <box>
+            <size> 0.5593371987342834 0.71736592648925781 0.19556337222456932 </size>
+          </box>
+        
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+        
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/base_link.STL</uri>
+          </mesh>
+        <!--
+          <box>
+            <size> 0.5593371987342834 0.7173652648925781 0.19556337222456932 </size>
+          </box>
+        -->
+        </geometry>
+        <material>
+          <diffuse>0.990196109 1 1 1</diffuse>
+          <ambient>0.990196109 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Hydrodynamics plugin -->
+    <plugin
+        filename="gz-sim-hydrodynamics-system"
+        name="gz::sim::systems::Hydrodynamics">
+      <link_name>base_link</link_name>
+      <water_density>1000</water_density>
+      <!-- Added mass: -->
+      <xDotU>0</xDotU>
+      <yDotV>0</yDotV>
+      <zDotW>0</zDotW>
+      <kDotP>0</kDotP>
+      <mDotQ>0</mDotQ>
+      <nDotR>0</nDotR>
+      <!-- First order stability derivative: -->
+      <xU>-74.82</xU>
+      <yV>-69.48</yV>
+      <zW>-728.4</zW>
+      <kP>-268.8</kP>
+      <mQ>-309.77 </mQ>
+      <nR>-105</nR>
+      <!-- Second order stability derivative: -->
+      <xUabsU>-748.22</xUabsU>
+      <yVabsV>-992.53</yVabsV>
+      <zWabsW>-1821.01</zWabsW>
+      <kPabsP>-672</kPabsP>
+      <mQabsQ>-774.44</mQabsQ>
+      <nRabsR>-523.27</nRabsR>
+    </plugin>
+
+    <joint name='blthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>0.17280000000000001 0.19450999999999999 0.0022515999999999999 0.78538999999999992 0.00011812999999990391 1.5707</pose>
+      <parent>base_link</parent>
+      <child>blthruster_link</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='blthruster_link'>
+      <pose relative_to='blthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-6.3113000000000004e-05 0.00014218999999999999 -0.00029144000000000002 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='blthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+        <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le bk.STL</uri>
+          </mesh>
+        -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='blthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le bk.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='brthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.13413 0.19247 0.076563000000000006 0.7854000000000001 -0.00011821000000006567 -1.5707</pose>
+      <parent>base_link</parent>
+      <child>brthruster_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='brthruster_link'>
+      <pose relative_to='brthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-6.3112000000000002e-05 -0.10495 -0.00029144000000000002 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='brthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri bk.STL</uri>
+          </mesh>
+          -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='brthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri bk.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='flthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>0.085049 -0.20755999999999999 -0.054761999999999998 -2.3561999999999999 -0.00011813999999990579 -1.5707</pose>
+      <parent>base_link</parent>
+      <child>flthruster_link</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='flthruster_link'>
+      <pose relative_to='flthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-6.3112000000000002e-05 -0.10495 0.018709 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='flthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le ft.STL</uri>
+          </mesh>
+          -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='flthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le ft.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='frthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.19500999999999999 -0.20548 0.019549 -2.3561999999999999 0.00011805999999993166 1.5707</pose>
+      <parent>base_link</parent>
+      <child>frthruster_link</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='frthruster_link'>
+      <pose relative_to='frthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-6.3113000000000004e-05 0.00014218999999999999 0.018709 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='frthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri ft.STL</uri>
+          </mesh>
+          -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='frthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri ft.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='slthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>0.15047481133718901 -0.0060208560618492998 0 -1.5705600591664299 -3.2662263898563071e-32 -3.14159265358979</pose>
+      <parent>base_link</parent>
+      <child>slthruster_link</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='slthruster_link'>
+      <pose relative_to='slthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-4.7221000000000001e-05 -0.0056338999999999998 -0.00029170999999999998 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='slthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le md.STL</uri>
+          </mesh>
+          -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='slthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/le md.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='srthruster_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.18612999999999999 -0.0060134000000000003 0 -1.5706 3.7221006555592136e-22 -3.1415853071795872</pose>
+      <parent>base_link</parent>
+      <child>srthruster_link</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='srthruster_link'>
+      <pose relative_to='srthruster_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-4.7221000000000001e-05 -0.0056324000000000001 -0.00029170999999999998 0 0 0</pose>
+        <mass>1.059</mass>
+        <inertia>
+          <ixx>100000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>100000000</iyy>
+          <iyz>0</iyz>
+          <izz>100000000</izz>
+        </inertia>
+      </inertial>
+      <collision name='srthruster_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <!--
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri md.STL</uri>
+          </mesh>
+          -->
+          <box>
+            <size> 0.096584 0.097292 0.112679 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='srthruster_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://meshes/ri md.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+
+    <plugin
+    filename="gz-sim-thruster-system"
+    name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>blthruster_joint</joint_name>
+      <thrust_coefficient>0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>brthruster_joint</joint_name>
+      <thrust_coefficient>0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>flthruster_joint</joint_name>
+      <!-- Reverse spin to balance torque -->
+      <thrust_coefficient>-0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>frthruster_joint</joint_name>
+      <!-- Reverse spin to balance torque -->
+      <thrust_coefficient>-0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>slthruster_joint</joint_name>
+      <thrust_coefficient>0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-thruster-system"
+        name="gz::sim::systems::Thruster">
+      <namespace>kujagra</namespace>
+      <joint_name>srthruster_joint</joint_name>
+      <!-- Reverse spin to balance torque -->
+      <thrust_coefficient>-0.02</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>False</use_angvel_cmd>
+    </plugin>
+
+  </model>
+</sdf>
